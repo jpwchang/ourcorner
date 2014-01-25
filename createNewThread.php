@@ -1,6 +1,6 @@
 <?php
 
-require_once("conf.inc.php");
+require_once('conf.inc.php');
 session_start();
 $db_handle = mysqli_connect($CFG->hostname, $CFG->username, $CFG->password, $CFG->dbName);
 
@@ -14,7 +14,8 @@ if ($worked = mysqli_fetch_assoc($result)) {
 	//now that the file has been created, we can write to it
 	$newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
 	$t = time();
-	fwrite($newfile, $user." ".date("d/m/Y", $Y).$_POST['content']);
+	//fwrite($newfile, $user." ".date("d/m/Y", $Y).$_POST['content']);
+	fwrite($newfile, "HI!");
 	fclose($newfile);
 }
 
