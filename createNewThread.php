@@ -11,7 +11,8 @@ if ($worked = mysqli_fetch_assoc($result)) {
 	fclose($newfile);
 	//now that the file has been created, we can write to it
 	$newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
-	fwrite($newfile, $user." ".date("d/m/Y", time()).$_POST['content']);
+	$t = time();
+	fwrite($newfile, $user." ".date("d/m/Y", $t).$_POST['content']);
 	fclose($newfile);
 }
 
