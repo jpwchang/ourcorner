@@ -12,7 +12,7 @@ if ($worked = mysqli_fetch_assoc($result)) {
 	fclose($newfile);
 }
 
-
+header('Location: home_page.php');
 
 
 
