@@ -1,9 +1,0 @@
-Standard Square Room
-
-Phase 0: move east until wall in East - then turn south, GOTO 1
-Phase 1: move south untill wall in South - then turn west, GOTO 2
-
-Phase 2: move west until wall in West - then turn North, GOTO 3
-Phase 3: move north 1 - then turn East, GOTO 4
-Phase 4: move east until wall in East - then turn north, GOTO 5
-Phase 5: move north 1 - then tun West, GOTO 2
