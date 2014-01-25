@@ -11,9 +11,9 @@ fclose($newfile);
 //now that the file has been created, we can write to it
 $newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
 $t = time();
-fwrite($newfile, $_SESSION['cur_user']." ".date("d/m/Y", $Y).$_POST['content']);
+fwrite($newfile, $_SESSION['cur_user']." ".date("d/m/Y H:i:s", $t)." ".$_POST['content']);
 fclose($newfile);
-}
+
 
 header('Location: home_page.php');
 

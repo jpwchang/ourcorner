@@ -39,8 +39,8 @@
 
 
 <?php
-$corner=fopen($_GET['filename'], "r");
-echo filename;
+$corner=fopen("threads/".$_GET['filename'].".cr", "r");
+echo $_GET['filename'];
 
 while(!feof($corner))
 {
