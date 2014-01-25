@@ -9,6 +9,7 @@ echo $_SESSION['cur_id'];
 $result = mysqli_query("SELECT username FROM users WHERE id='".$_SESSION['cur_id']."';");
 
 if ($worked = mysqli_fetch_assoc($result)) {
+	echo "WOOHOOO";
 	$user = $worked['username'];
 	fclose($newfile);
 	//now that the file has been created, we can write to it
@@ -19,7 +20,7 @@ if ($worked = mysqli_fetch_assoc($result)) {
 	fclose($newfile);
 }
 
-//header('Location: home_page.php');
+#header('Location: home_page.php');
 
 
 
