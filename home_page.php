@@ -10,7 +10,7 @@
 
 <h1>OurCorner</h1>
 
-<h5>Marisol Beck</h5>
+<h5>Muddysoul</h5>
 
 <form action="logout.php" method="post">
 <input type="submit" value="Logout">
@@ -82,12 +82,12 @@
 
 <div>
 <a href="URL">Fuck Cats</a>
-<p>Members: Zach, Jonathan</p>
+<p>Members: Zamru, JChang</p>
 </div>
 
 <div>
 <a href="URL">Cats are dabes</a>
-<p>Members: Adam, Paige</p>
+<p>Members: Adam, Prinnert</p>
 </div>
 
 
