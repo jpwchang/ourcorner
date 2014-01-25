@@ -34,10 +34,11 @@ if(!isset($_POST['username']) || !isset($_POST['password']))
 	$login = false;
 else
 {
-	$result = mysqli_query($db_handle, "SELECT id FROM users WHERE username='".$_POST['username']."' AND password='".$_POST['password']."';");
+	$result = mysqli_query($db_handle, "SELECT * FROM users WHERE username='".$_POST['username']."' AND password='".$_POST['password']."';");
 	if($success = mysqli_fetch_assoc($result))
 	{
 		$_SESSION['cur_id'] = $success['id'];
+		$_SESSION['cur_user'] = $success['username'];
 		$login = true;
 	}
 }

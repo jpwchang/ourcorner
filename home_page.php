@@ -57,7 +57,7 @@ if(mysqli_connect_errno($db_handle))
 <img src="img/logo.png" height="100px" />
 </div>
 <div class="usercontrol">
-Hello, Muddysoul
+Hello, <?php echo $_SESSION['cur_user']; ?>
 <br />
 <br />
 
@@ -71,30 +71,30 @@ Hello, Muddysoul
 <div class="sidebar">
 <div>
 <h3>Actions</h3>
-<a href="newThread.html">New Thread</a>
++ <a href="newThread.html">New Corner</a>
 <br />
-<a href="URL">My Account</a>
++ <a href="URL">My Account</a>
 </div>
 
 
 
 <div>
-<h3>My Threads</h3>
-<a href="URL">I heart sewing</a>
+<h3>My Corners</h3>
++ <a href="URL">I heart sewing</a>
 <br />
-<a href="URL">SUPERNATURAL!!</a>
++ <a href="URL">SUPERNATURAL!!</a>
 </div>
 </div>
 
 <div class="main">
 
 <div class="thread">
-<a href="URL">Fuck Cats</a>
+<a href="URL" style="font-size:22;">Fuck Cats</a>
 <p>Members: Zamru, JChang</p>
 </div>
 
 <div class="thread">
-<a href="URL">Cats are dabes</a>
+<a href="URL" style="font-size:22;">Cats are dabes</a>
 <p>Members: Adam, Prinnert</p>
 </div>
 
