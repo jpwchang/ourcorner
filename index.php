@@ -29,6 +29,7 @@ require_once('conf.inc.php');
 
 <head>
 	<title>OurCorner - Login</title>
+	<link rel="stylesheet" type="text/css" href="styles/ourcorner.css" />
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 1.23.1" />
 </head>

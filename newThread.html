@@ -6,10 +6,20 @@
 
 <body>
 <script>
+var numBoxes = 1;
+
 function displayBoxes() {
 var span = document.getElementById("users");
-var num = span.getElementsByTagName("input").length;
-span.innerHTML = span.innerHTML+"<input type='text' name=user"+num+"><br>";
+var vals = new Array();
+for (var i = 0; i < numBoxes; i++) {
+	vals[i] = document.getElementById("user"+i).value;
+}
+span.innerHTML ="";
+for (var i = 0; i < numBoxes; i++) {
+	txt = vals[i];
+	span.innerHTML = span.innerHTML + "<input type='text' id=user"+i+" value=\""+txt+"\"><br>";
+}
+numBoxes++;
 }
 </script>
 
@@ -19,14 +29,17 @@ span.innerHTML = span.innerHTML+"<input type='text' name=user"+num+"><br>";
 
 <h3>New Corner</h3>
 <div id="main">
-<form id="newthread" action="createNewThread.php" method="post">
+<form id="newthread" action="createNewThread" method="post">
 
 <p>Corner Name: <input type="text" name="name"></p>
 <p>To add others to this Corner, enter their user names below:</p>
 
 <span id="users">
+<input type='text' id=user0><br>
 </span>
-<input type="button" onClick="displayBoxes()" value="Add additional users">
+<input type="button" onClick="displayBoxes()" value="Add Additional Users">
+<br>
+<!--<input type="button" onClick = "echo()" value="Submit">!-->
 </form>
 </div>
 
