@@ -4,7 +4,7 @@ html
 }
 div.main
 {
-	display:inline-block;
+	float:left;
 	vertical-align:top;
 	text-align:left;
 	margin:auto;
@@ -19,7 +19,7 @@ div.main
 }
 div.sidebar
 {
-	display:inline-block;
+  float:left;
 	text-align:left;
 	background-color:#73aad4;
 	width:200px;
@@ -52,5 +52,15 @@ div.thread
 	border:1px solid #6b6b6b;
 	width:80%;
 	padding:5px;
-	background-color:#ababab;
+	margin:5px;
+	background-color:#d9d9d9;
+}
+div.logo
+{
+  float:left;
+}
+div.usercontrol
+{
+  text-align:right;
+  float:right;
 }

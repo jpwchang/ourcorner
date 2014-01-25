@@ -52,19 +52,22 @@ if(mysqli_connect_errno($db_handle))
 
 
 
-<div>
-
-<h1>OurCorner</h1>
-
-<h3>Muddysoul</h3>
+<div style="height:120px;">
+<div class="logo">
+<img src="img/logo.png" height="100px" />
+</div>
+<div class="usercontrol">
+Hello, Muddysoul
+<br />
+<br />
 
 <form action="logout.php" method="post">
 <input type="submit" value="Logout">
 </form>
-
+</div>
 </div>
 
-
+<div>
 <div class="sidebar">
 <div>
 <h3>Actions</h3>
@@ -83,63 +86,21 @@ if(mysqli_connect_errno($db_handle))
 </div>
 </div>
 
+<div class="main">
 
-<ul class="tabs">
-<li>
-<input type="radio" checked name="tabs" id="recent">
-<label for="recent">Recent Threads</label>
-<div id="tab-content1" class="tab-content animated fadeIn">
-
-<div>
+<div class="thread">
 <a href="URL">Fuck Cats</a>
 <p>Members: Zamru, JChang</p>
 </div>
 
-<div>
+<div class="thread">
 <a href="URL">Cats are dabes</a>
 <p>Members: Adam, Prinnert</p>
 </div>
 
-</div>
-</li>
-
-<li>
-<input type="radio" name="tabs" id="my">
-<label for="my">My Threads</label>
-<div id="tab-content2" class="tab-content animated fadeIn">
-
-<div>
-<a href="URL">Fuck Cats</a>
-<p>Members: Zamru, JChang</p>
-</div>
-
-<div>
-<a href="URL">Cats are dabes</a>
-<p>Members: Adam, Prinnert</p>
-</div>
 
 </div>
-</li>
-
-<li>
-<input type="radio" name="tabs" id="subscribed">
-<label for="subscribed">Subscribed Threads</label>
-<div id="tab-content3" class="tab-content animated fadeIn">
-
-<div>
-<a href="URL">Fuck Cats</a>
-<p>Members: Zamru, JChang</p>
 </div>
-
-<div>
-<a href="URL">Cats are dabes</a>
-<p>Members: Adam, Prinnert</p>
-</div>
-
-</div>
-</li>
-</ul>
-
 
 </body>
 </html>
