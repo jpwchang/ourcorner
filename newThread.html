@@ -24,7 +24,7 @@ span.innerHTML = span.innerHTML+"<input type='text' name=user"+num+"><br>";
 <p>Corner Name: <input type="text" name="name"></p>
 <p>To add others to this Corner, enter their user names below:</p>
 
-<span id="users">
+<span id="users" onLoad="displayBoxes()">
 </span>
 <input type="button" onClick="displayBoxes()" value="Add additional users">
 </form>
