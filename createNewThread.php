@@ -3,13 +3,13 @@
 require_once('conf.inc.php');
 session_start();
 $db_handle = mysqli_connect($CFG->hostname, $CFG->username, $CFG->password, $CFG->dbName);
-if (msqyli_connect_errno($db_handle)) {
-	echo "Uh oh...";
+if (mysqli_connect_errno($db_handle)) {
+	exit(1);
 }
 $newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
-echo $_SESSION['cur_id'];
+#echo $_SESSION['cur_id'];
 $result = mysqli_query("SELECT username FROM users WHERE id='".$_SESSION['cur_id']."';");
-
+echo $worked = mysqli_fetch_assoc($result);
 if ($worked = mysqli_fetch_assoc($result)) {
 	echo "WOOHOOO";
 	$user = $worked['username'];
