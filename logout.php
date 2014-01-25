@@ -22,14 +22,13 @@
  * 
  */
 
-require_once('conf.inc.php');
 session_start();
-
-//Only perform logout action if we are currently logged in. This 
-//prevents this page from causing problems if accessed directly.
-if(isset($_SESSION['authenticated'])) {
-	unset($_SESSION['authenticated']);
-	unset($_SESSION['cur_id'];
-	header('Location: index.php');
+$_SESSION = array();
+if(ini_get("session.use_cookies"))
+{
+	$params = session_get_cookie_params();
+	setcookie(session_name(), '', time()-42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 }
+session_destroy();
+header('Location: index.php');
 ?>
