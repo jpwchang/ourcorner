@@ -7,21 +7,15 @@ if (mysqli_connect_errno($db_handle)) {
 	exit(1);
 }
 $newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
-#echo $_SESSION['cur_id'];
-$result = mysqli_query("SELECT username FROM users WHERE id='".$_SESSION['cur_id']."';");
-if ($worked = mysqli_fetch_assoc($result)) {
-	echo "WOOHOOO";
-	$user = $worked['username'];
-	fclose($newfile);
-	//now that the file has been created, we can write to it
-	$newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
-	$t = time();
-	//fwrite($newfile, $user." ".date("d/m/Y", $Y).$_POST['content']);
-	fwrite($newfile, "HI!");
-	fclose($newfile);
+fclose($newfile);
+//now that the file has been created, we can write to it
+$newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
+$t = time();
+fwrite($newfile, $_SESSION['cur_user']." ".date("d/m/Y", $Y).$_POST['content']);
+fclose($newfile);
 }
 
-#header('Location: home_page.php');
+header('Location: home_page.php');
 
 
 
