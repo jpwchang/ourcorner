@@ -9,7 +9,7 @@ if (mysqli_connect_errno($db_handle)) {
 $newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
 #echo $_SESSION['cur_id'];
 $result = mysqli_query("SELECT username FROM users WHERE id='".$_SESSION['cur_id']."';");
-echo $worked = mysqli_fetch_assoc($result);
+echo mysqli_fetch_assoc($result);
 if ($worked = mysqli_fetch_assoc($result)) {
 	echo "WOOHOOO";
 	$user = $worked['username'];
