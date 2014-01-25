@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<title>Create a New Corner</title>
+</head>
+
+<body>
+<script>
+function displayBoxes() {
+var span = document.getElementById("users");
+var num = span.getElementsByTagName("input").length;
+span.innerHTML = span.innerHTML+"<input type='text' name=user"+num+"><br>";
+}
+</script>
+
+<h1>OurCorner</h1>
+<br>
+<br>
+
+<h3>New Corner</h3>
+<div id="main">
+<form id="newthread" action="createNewThread.php" method="post">
+
+<p>Corner Name: <input type="text" name="name"></p>
+<p>To add others to this Corner, enter their user names below:</p>
+
+<span id="users">
+</span>
+<input type="button" onClick="displayBoxes()" value="Add additional users">
+</form>
+</div>
+
+</html>
