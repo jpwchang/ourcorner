@@ -3,7 +3,7 @@
 require_once('conf.inc.php');
 session_start();
 $db_handle = mysqli_connect($CFG->hostname, $CFG->username, $CFG->password, $CFG->dbName);
-if msqyli_connect_errno($db_handle) {
+if (msqyli_connect_errno($db_handle)) {
 	echo "Uh oh...";
 }
 $newfile = fopen("/srv/http/threads/".$_POST['name'].".cr", 'w+') or die("Failure!");
