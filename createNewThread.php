@@ -1,10 +1,16 @@
 <?php
 
-$newfile = fopen("threads/"+$_POST['name']+".cr", 'w');
+require_once("conf.inc.php");
+$db_handle = mysqli_connect($CFG->hostname, $CFG->username, $CFG->password, $CFG->dbName);
 
-fwrite($newfile, /*username*/+" "+date("d/m/Y")+ $_POST['content');
+$newfile = fopen("threads/"+$_POST['name']+".cr", 'w+');
+$result = mysqli_query("SELECT username FROM users WHERE id='".$_SESSION['cur_id']."';");
 
-fclose($newfile);
+if ($worked = mysqli_fetch_assoc($result)) {
+	$user = $worked['username'];
+	fwrite($newfile, $user." ".date("d/m/Y", time()).$_POST['content');
+	fclose($newfile);
+}
 
 
 

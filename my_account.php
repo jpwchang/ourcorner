@@ -10,7 +10,7 @@
 
 <h1>OurCorner</h1>
 
-<h5>Muddysoul</h5>
+<h3>Muddysoul</h3>
 
 <form action="logout.php" method="post">
 <input type="submit" value="Logout">
@@ -23,7 +23,7 @@
 <div>
 <h3>Actions</h3>
 <a href="newThread.html">New Thread</a>
-<dr>
+<br />
 <a href="URL">My Account</a>
 </div>
 
@@ -32,7 +32,7 @@
 <div>
 <h3>My Threads</h3>
 <a href="URL">I heart sewing</a>
-<dr>
+<br />
 <a href="URL">SUPERNATURAL!!</a>
 </div>
 

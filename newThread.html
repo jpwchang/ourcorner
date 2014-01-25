@@ -6,20 +6,17 @@
 
 <body>
 <script>
-var numBoxes = 1;
-
 function displayBoxes() {
 var span = document.getElementById("users");
-var vals = new Array();
+var numBoxes = span.getElementsByTagName("input").length;
+var txt = "";
 for (var i = 0; i < numBoxes; i++) {
-	vals[i] = document.getElementById("user"+i).value;
+	var val = document.getElementById("user"+i).value;
+
+	txt = txt + "<input type='text' name=\"user"+i+"\" id=\"user"+i+"\" value=\""+val+"\"><br>";
 }
-span.innerHTML ="";
-for (var i = 0; i < numBoxes; i++) {
-	txt = vals[i];
-	span.innerHTML = span.innerHTML + "<input type='text' id=user"+i+" value=\""+txt+"\"><br>";
-}
-numBoxes++;
+txt = txt + "<input type='text' name=\"user"+numBoxes+"\" id=\"user"+numBoxes+"\"><br>";
+span.innerHTML = txt;
 }
 </script>
 
@@ -33,12 +30,15 @@ numBoxes++;
 
 <p>Corner Name: <input type="text" name="name"></p>
 <p>To add others to this Corner, enter their user names below:</p>
-
 <span id="users">
-<input type='text' id=user0><br>
+<input type='text' id="user0"><br>
 </span>
 <input type="button" onClick="displayBoxes()" value="Add Additional Users">
 <br>
+<br>
+<textarea rows=20 cols=100 value="Type Your Post Here..."></textarea>
+<br>
+
 <input type="submit" value="Submit">
 </form>
 </div>
