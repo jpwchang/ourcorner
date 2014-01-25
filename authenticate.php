@@ -2,7 +2,7 @@
 /*
  * authenticate.php
  * 
- * Copyright 2014 Jonathan Chang <jonathan.chang13@gmail.com>
+ * Copyright 2013 Unknown <jonathan@jpc-pc>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,43 +21,38 @@
  * 
  * 
  */
-
 require_once('conf.inc.php');
 session_start();
 $login = false;
 
-$dbHandle = mysqli_connect($CFG->hostname, $CFG->username, 
-                           $CFG->password, $CFG->db_name);
+$db_handle = mysqli_connect($CFG->hostname, $CFG->username, $CFG->password, $CFG->dbName);
 
 if(mysqli_connect_errno($db_handle))
-  $login = false;
+	exit(1);
 
-//Login will be true if we find a user matching the given
-//username and password. If we find that user, we save the user's
-//id in a session variable for reference later.
 if(!isset($_POST['username']) || !isset($_POST['password']))
-  $login = false;
-else {
-	$userQuery = "SELECT * FROM users WHERE ".
-	             "username='{$_POST['username']}' ".
-	             "AND password='{$_POST['password']}';"
-  $userInfo = mysqli_query($dbHandle, $userQuery);
-  if($userFound = mysqli_fetch_assoc($userInfo)) {
-		$_SESSION['cur_id'] = $userFound['id'];
+	$login = false;
+else
+{
+	$result = mysqli_query($db_handle, "SELECT id FROM users WHERE username='".$_POST['username']."' AND password='".$_POST['password']."';");
+	if($success = mysqli_fetch_assoc($result))
+	{
+		$_SESSION['cur_id'] = $success['id'];
 		$login = true;
 	}
 }
 
-//If we are successfully logged in, set session variables to indicate
-//it, and then redirect to profile page. Else, redirect to login.
-if($login) {
-  $_SESSION['authenticated'] = 1;
-  if(isset($_SESSION['failure'])) {
-	  unset($_SESSION['failure']);
-	}
+if($login)
+{
+	$_SESSION['authenticated'] = 1;
+	if(isset($_SESSION['failure']))
+		unset($_SESSION['failure']);
 	header('Location: home_page.php');
-} else {
+}
+else
+{
 	$_SESSION['failure'] = 1;
 	header('Location: index.php');
 }
 ?>
+
