@@ -89,7 +89,7 @@ Hello, <?php echo $_SESSION['cur_user']; ?>
 <div class="main">
 
 <div class="thread">
-<a href="URL" style="font-size:22;">Fuck Cats</a>
+<a href="view_thread.php?filename=Hi%20Kevin" style="font-size:22;">Hi Kevin</a>
 <p>Members: Zamru, JChang</p>
 </div>
 

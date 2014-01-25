@@ -1,7 +1,6 @@
 <?php
-session_start();
 require_once('conf.inc.php');
-$corner=fopen("threads/".$_GET['filename'].".cr", "r+");
+session_start();
 ?>
 
 <html>
@@ -18,8 +17,7 @@ $corner=fopen("threads/".$_GET['filename'].".cr", "r+");
 <img src="img/logo.png" height="100px" />
 </div>
 <div class="usercontrol">
-Hello,
-<?php echo $_SESSION['cur_user']; ?>
+Hello, <? php echo $_SESSION['cur_user']; ?>
 <br />
 <br />
 
@@ -50,6 +48,7 @@ Hello,
 
 <div class="main">
 <?php
+$corner=fopen("threads/".$_GET['filename'].".cr", "r");
 echo "<h2>".$_GET['filename']."</h2>";
 echo "<div style=\"align:center;\">";
 while(!feof($corner))
@@ -77,12 +76,10 @@ echo "</div>";
 fclose($file);
 ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-<textarea rows=10 cols=80 name="reply" value="Leave a reply..."></textarea>
-<br />
-<input type="submit" value="Submit" />
-</form>
+<form action="
+
 </div>
+
 </div>
 
 
