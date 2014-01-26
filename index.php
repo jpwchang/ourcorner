@@ -22,6 +22,7 @@
  * 
  */
 require_once('conf.inc.php');
+session_start();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -34,8 +35,9 @@ require_once('conf.inc.php');
 	<meta name="generator" content="Geany 1.23.1" />
 </head>
 
-<body>
-	<h1>OurCorner</h1>
+<body style="background-color:#aeebff;">
+	<div style="text-align:center;">
+	<img src="img/logo.png" height="200px" style="border:0; margin-top:50px;" />
 	<form action="authenticate.php" method="post">
 	  <input type="text" name="username" id="username" placeholder="Username" />
 	  <br />
@@ -43,6 +45,11 @@ require_once('conf.inc.php');
 	  <br />
 	  <input type="submit" id="login" name="login" value="Login" />
 	</form>
+	<br />
+	Don't have an account? <a href="new_registration.php">Click here</a>
+	<br />
+	<a href="forgot_pwd.php">Forgot Password?</a>
+	</div>
 </body>
 
 </html>

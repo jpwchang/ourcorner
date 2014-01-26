@@ -1,6 +1,6 @@
 <?php
 /*
- * manage_corner.php
+ * home.php
  * 
  * Copyright 2013 Unknown <jonathan@jpc-pc>
  * 
@@ -43,7 +43,7 @@ if(mysqli_connect_errno($db_handle))
 
 <html>
 <head>
-	<title>OurCorner - Manage <?php echo $_GET['filename']; ?></title>
+	<title>OurCorner - Home</title>
 	<link rel="stylesheet" type="text/css" href="styles/ourcorner.css" />
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 1.23.1" />
@@ -71,60 +71,12 @@ Hello, <?php echo $_SESSION['cur_user']; ?>
 <div class="sidebar">
 <div>
 <h3>Actions</h3>
-+ <a href="newThread.php">New Corner</a>
++ New Corner
 <br />
 + <a href="my_account.php">My Account</a>
 <br />
 + <a href="manageSubs.php">Manage Subscriptions</a>
 </div>
-</div>
-
-<div class="main">
-
-<?php
-$corner=fopen("threads/".$_GET['filename'].".cr", "r+");
-echo "<div style=\"font-size:28;\">Manage ";
-echo "\"".$_GET['filename']."\"</div>";
-
-$admins = fgets($corner);
-$contribs = fgets($corner);
-$adminList = explode("`", $admins);
-$contribList = explode("`", $contribs);
-
-fclose($corner);
-?>
-
-<p>Select Buddies to give them admin status or delete them from this corner.</p>
-
-<h4>Buddies:</h4>
-
-<form name="input" action="RemoveBuddies.php" method="get">
-<?php
-/*for($i=0; $i<count($adminList); $i++) {
-	if(strlen(trim($adminList[$i])) > 0)
-		echo '<input type="checkbox" name="member" value="m'.($i+1).'">'.$adminList[$i].'<br />';
-}*/
-for($i=0; $i<count($contribList); $i++) {
-  if(strlen(trim($contribList[$i])) > 0)
-    echo '<input type="checkbox" name="member'.($i).'" value='.$contribList[$i].'>'.$contribList[$i].'<br />';
-}
-?>
-	<input type="hidden" name="filename" id="filename" value="<?php echo $_GET['filename']; ?>">
-<input type="submit" value="Delete">
-</form>
-
-<form action="AddBuddies.php" method="get">
-
-<p>Add Buddies to this Corner:</p>
-<span id="users">
-<input type='text' name="user0" id="user0"><br>
-</span>
-<input type="button" onClick="displayBoxes()" value="Add Additional Users">
-<br /><br />
-<input type="hidden" name="filename" id="filename" value="<?php echo $_GET['filename']; ?>">
-<input type="submit" value="Add Buddies to Corner">
-</form>
-
 </div>
 <script>
 function displayBoxes() {
@@ -140,5 +92,24 @@ txt = txt + "<input type='text' name=\"user"+numBoxes+"\" id=\"user"+numBoxes+"\
 span.innerHTML = txt;
 }
 </script>
-</body>
+
+<div class="main">
+	<h3>New Corner</h3>
+<form id="newthread" action="createNewThread.php" method="post">
+
+<p>Corner Name: <input type="text" name="name"></p>
+<p>To add others to this Corner, enter their user names below:</p>
+<span id="users">
+<input type='text' name="user0" id="user0"><br>
+</span>
+<input type="button" onClick="displayBoxes()" value="Add Additional Users">
+<br>
+<br>
+<textarea rows=20 cols=100 name="content" value="Type Your Post Here..."></textarea>
+<br>
+
+<input type="submit" value="Submit">
+</form>
+</div>
+
 </html>

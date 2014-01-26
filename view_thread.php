@@ -1,7 +1,21 @@
 <?php
 session_start();
 require_once('conf.inc.php');
+
+//Prevent unauthenticated users from getting in
+if(!isset($_SESSION['authenticated']))
+{
+	$_SESSION['denied'] = 1;
+	header('Location: index.php');
+}
+else
+{
+	if(isset($_SESSION['denied']))
+		unset($_SESSION['denied']);
+}
+
 $corner=fopen("threads/".$_GET['filename'].".cr", "r+");
+
 ?>
 
 <html>
@@ -15,7 +29,7 @@ $corner=fopen("threads/".$_GET['filename'].".cr", "r+");
 
 <div style="height:120px;">
 <div class="logo">
-<img src="img/logo.png" height="100px" />
+<a href="home_page.php"><img src="img/logo.png" height="100px" style="border:0;" /></a>
 </div>
 <div class="usercontrol">
 Hello,
@@ -33,24 +47,25 @@ Hello,
 <div class="sidebar">
 <div>
 <h3>Actions</h3>
-+ <a href="newThread.html">New Thread</a>
++ <a href="newThread.php">New Corner</a>
 <br />
-+ <a href="URL">My Account</a>
-</div>
-
-
-
-<div>
-<h3>My Threads</h3>
-+ <a href="URL">I heart sewing</a>
++ <a href="my_account.php">My Account</a>
 <br />
-+ <a href="URL">SUPERNATURAL!!</a>
++ <a href="manageSubs.php">Manage Subscriptions</a>
 </div>
 </div>
 
 <div class="main">
 <?php
-echo "<h2>".$_GET['filename']."</h2>";
+$admins = fgets($corner);
+$contribs = fgets($corner);
+$adminList = explode("`", $admins);
+$contribList = explode("`", $contribs);
+echo "<span style=\"font-size:30;\">".$_GET['filename']." </span>";
+foreach($adminList as $value) {
+	if($value == $_SESSION['cur_user'])
+		echo "<a href=\"manage_corner.php?filename=".$_GET['filename']."\">Manage Corner</a>";
+}
 echo "<div style=\"align:center;\">";
 while(!feof($corner))
 {
@@ -68,19 +83,22 @@ $time = substr($post, 0, $space);
 
 $rest = substr($post, $space+1);
 
-echo "<div class=\"response\">";
-echo "<b>".$name."</b> on ".$date." at ".$time."<br /><br />";
-echo $rest;
-echo "</div>";
+if(strlen($rest) > 0) {
+	echo "<div class=\"response\">";
+	echo "<b>".$name."</b> on ".$date." at ".$time."<br /><br />";
+	echo $rest;
+	echo "</div>";
+}
 }
 echo "</div>";
 fclose($file);
 ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form action="modifyThread.php" method="post">
 <textarea rows=10 cols=80 name="reply" value="Leave a reply..."></textarea>
 <br />
-<input type="submit" value="Submit" />
+<input type="hidden" name="name" id="name" value="<?php echo $_GET['filename']; ?>" />
+<input type="submit" value="Submit Reply" />
 </form>
 </div>
 </div>

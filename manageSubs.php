@@ -1,6 +1,6 @@
 <?php
 /*
- * manage_corner.php
+ * manageSubs.php
  * 
  * Copyright 2013 Unknown <jonathan@jpc-pc>
  * 
@@ -75,7 +75,7 @@ Hello, <?php echo $_SESSION['cur_user']; ?>
 <br />
 + <a href="my_account.php">My Account</a>
 <br />
-+ <a href="manageSubs.php">Manage Subscriptions</a>
++ Manage Subscriptions
 </div>
 </div>
 
@@ -83,8 +83,6 @@ Hello, <?php echo $_SESSION['cur_user']; ?>
 
 <?php
 $corner=fopen("threads/".$_GET['filename'].".cr", "r+");
-echo "<div style=\"font-size:28;\">Manage ";
-echo "\"".$_GET['filename']."\"</div>";
 
 $admins = fgets($corner);
 $contribs = fgets($corner);
@@ -94,51 +92,22 @@ $contribList = explode("`", $contribs);
 fclose($corner);
 ?>
 
-<p>Select Buddies to give them admin status or delete them from this corner.</p>
+<p>Manage your active Corner subscriptions.</p>
 
-<h4>Buddies:</h4>
-
-<form name="input" action="RemoveBuddies.php" method="get">
+<form action="removeSub.php" method="post">
 <?php
-/*for($i=0; $i<count($adminList); $i++) {
-	if(strlen(trim($adminList[$i])) > 0)
-		echo '<input type="checkbox" name="member" value="m'.($i+1).'">'.$adminList[$i].'<br />';
-}*/
-for($i=0; $i<count($contribList); $i++) {
-  if(strlen(trim($contribList[$i])) > 0)
-    echo '<input type="checkbox" name="member'.($i).'" value='.$contribList[$i].'>'.$contribList[$i].'<br />';
+$subQuery = mysqli_query($db_handle, "SELECT ThreadsSubscribed FROM users WHERE id='".$_SESSION['cur_id']."';");
+if($subscrips = mysqli_fetch_assoc($subQuery)) {
+	$subData = $subscrips['ThreadsSubscribed'];
+	$allSubs = explode("`", $subData);
+  for($i=0; $i<count($allSubs)-1; $i++) {
+	  echo '<input type="checkbox" name="subscription[]" value="'.$allSubs[$i].'"/>'.$allSubs[$i].'<br />';
+	}
+	echo '<input type="submit" name="sumbit" value="Unsubscribe from Selected" />';
 }
 ?>
-	<input type="hidden" name="filename" id="filename" value="<?php echo $_GET['filename']; ?>">
-<input type="submit" value="Delete">
-</form>
-
-<form action="AddBuddies.php" method="get">
-
-<p>Add Buddies to this Corner:</p>
-<span id="users">
-<input type='text' name="user0" id="user0"><br>
-</span>
-<input type="button" onClick="displayBoxes()" value="Add Additional Users">
-<br /><br />
-<input type="hidden" name="filename" id="filename" value="<?php echo $_GET['filename']; ?>">
-<input type="submit" value="Add Buddies to Corner">
 </form>
 
 </div>
-<script>
-function displayBoxes() {
-var span = document.getElementById("users");
-var numBoxes = span.getElementsByTagName("input").length;
-var txt = "";
-for (var i = 0; i < numBoxes; i++) {
-	var val = document.getElementById("user"+i).value;
-
-	txt = txt + "<input type='text' name=\"user"+i+"\" id=\"user"+i+"\" value=\""+val+"\"><br>";
-}
-txt = txt + "<input type='text' name=\"user"+numBoxes+"\" id=\"user"+numBoxes+"\"><br>";
-span.innerHTML = txt;
-}
-</script>
 </body>
 </html>

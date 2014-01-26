@@ -54,7 +54,7 @@ if(mysqli_connect_errno($db_handle))
 
 <div style="height:120px;">
 <div class="logo">
-<img src="img/logo.png" height="100px" />
+<a href="home_page.php"><img src="img/logo.png" height="100px" style="border:0;" /></a>
 </div>
 <div class="usercontrol">
 Hello, <?php echo $_SESSION['cur_user']; ?>
@@ -71,32 +71,74 @@ Hello, <?php echo $_SESSION['cur_user']; ?>
 <div class="sidebar">
 <div>
 <h3>Actions</h3>
-+ <a href="newThread.html">New Corner</a>
++ <a href="newThread.php">New Corner</a>
 <br />
-+ <a href="URL">My Account</a>
-</div>
-
-
-
-<div>
-<h3>My Corners</h3>
-+ <a href="URL">I heart sewing</a>
++ <a href="my_account.php">My Account</a>
 <br />
-+ <a href="URL">SUPERNATURAL!!</a>
++ <a href="manageSubs.php">Manage Subscriptions</a>
 </div>
 </div>
 
 <div class="main">
 
-<div class="thread">
-<a href="view_thread.php?filename=Hi%20Kevin" style="font-size:22;">Hi Kevin</a>
-<p>Members: Zamru, JChang</p>
-</div>
+<?php
+$adminQuery = mysqli_query($db_handle, "SELECT * FROM users WHERE id='".$_SESSION['cur_id']."';");
+if($queryData = mysqli_fetch_assoc($adminQuery)) {
+	$adminThreads = $queryData['AdminThreads'];
+	$subscriptions = $queryData['ThreadsSubscribed'];
+	$splitAdminThreads = explode("`", $adminThreads);
+	$splitSubThreads = explode("`", $subscriptions);
+	echo "<h3>My Admin Corners</h3>";
+	foreach($splitAdminThreads as $value) {
+		if(strlen($value)  == 0) break;
+		$corner=fopen("threads/".$value.".cr", "r");
+		$admins = fgets($corner);
+		$contribs = fgets($corner);
+		$adminList = explode("`", $admins);
+		$contribList = explode("`", $contribs);
 
-<div class="thread">
-<a href="URL" style="font-size:22;">Cats are dabes</a>
-<p>Members: Adam, Prinnert</p>
-</div>
+		fclose($corner);
+
+		echo '<div class="thread">';
+		echo "<a href=\"view_thread.php?filename={$value}\" style=\"font-size:22;\">{$value}</a>";
+		echo "<p>Buddies: ";
+		for($i=0; $i<count($adminList)-1; $i++) {
+			if($i < 5) echo $adminList[$i].", ";
+		}
+		for($i=0; $i<count($contribList)-1; $i++) {
+			if($i < 5-count($adminList)) echo $contribList[$i].", ";
+		}
+		if(count($adminList)+count($contribList) > 5) echo "...";
+		echo "(Total ".(count($adminList)+count($contribList)-2).")</p>";
+		echo "</div>";
+	}
+
+	echo "<h3>My Subscribed Corners</h3>";
+	foreach($splitSubThreads as $value) {
+		if(strlen($value)  == 0) break;
+		$corner=fopen("threads/".$value.".cr", "r");
+		$admins = fgets($corner);
+		$contribs = fgets($corner);
+		$adminList = explode("`", $admins);
+		$contribList = explode("`", $contribs);
+
+		fclose($corner);
+
+		echo '<div class="thread">';
+		echo "<a href=\"view_thread.php?filename={$value}\" style=\"font-size:22;\">{$value}</a>";
+		echo "<p>Buddies: ";
+		for($i=0; $i<count($adminList)-1; $i++) {
+			if($i < 5) echo $adminList[$i].", ";
+		}
+		for($i=0; $i<count($contribList)-1; $i++) {
+			if($i < 5-count($adminList)) echo $contribList[$i].", ";
+		}
+		if(count($adminList)+count($contribList) > 5) echo "...";
+		echo "(Total ".(count($adminList)+count($contribList)-2).")</p>";
+		echo "</div>";
+	}
+}
+?>
 
 
 </div>
