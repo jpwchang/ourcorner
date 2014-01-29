@@ -33,7 +33,12 @@ for ($i = 0; $i < count($_POST)-2; $i++) {
 }
 if(count($_POST) >2) $output .= "\n";
 
-$output .= $_SESSION['cur_user']." ".date("d/m/Y H:i:s", $t)." ".str_replace("\n", "<br />", $_POST['content'])."\n";
+//Strip html tags and change newline characters to html line breaks
+$allowedTags = '<b><i><br/><br><ul><li><img><a>';
+$sanitizedComment = strip_tags($_POST['content'], $allowedTags);
+$sanitizedComment = str_replace("\n", "<br/>", $sanitizedComment);
+
+$output .= $_SESSION['cur_user']." ".date("d/m/Y H:i:s", $t)." ".$sanitizedComment."\n";
 fwrite($newfile, $output);
 fclose($newfile);
 
