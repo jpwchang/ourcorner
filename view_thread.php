@@ -91,7 +91,7 @@ if(strlen($rest) > 0) {
 }
 }
 echo "</div>";
-fclose($file);
+fclose($corner);
 ?>
 
 <form action="modifyThread.php" method="post">
