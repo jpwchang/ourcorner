@@ -28,6 +28,7 @@ fclose($newfile);
 
 //Get the list of subscribers to this thread
 $subList = explode("`", $subscribers);
+$adminsList = explode("`", $admins);
 
 //Now we open the same file for writing, putting the file pointer at the end of file
 $newfile = fopen("threads/".$_POST['name'].".cr", 'a') or die("Modification Failure!");
@@ -36,13 +37,16 @@ fwrite($newfile, $_SESSION['cur_user']." ".date("d/m/Y H:i:s", $t)." ".str_repla
 fclose($newfile);
 
 //Update the order of the MySQL admin threads entry
-$updateQuery = mysqli_query($db_handle, "SELECT AdminThreads FROM users WHERE id='".$_SESSION['cur_id']."';");
-if($threadList = mysqli_fetch_assoc($updateQuery))
+if(strcmp($_SESSION['cur_user'], $adminsList[0]) == 0)
 {
-  $threads = $threadList['AdminThreads'];
-  $threads = str_replace($_POST['name']."`", "", $threads);
-  $threads = $_POST['name']."`".$threads;
-  $restoreQuery = mysqli_query($db_handle, "UPDATE users SET AdminThreads='".$threads."' WHERE id='".$_SESSION['cur_id']."';");
+  $updateQuery = mysqli_query($db_handle, "SELECT AdminThreads FROM users WHERE id='".$_SESSION['cur_id']."';");
+  if($threadList = mysqli_fetch_assoc($updateQuery))
+  {
+    $threads = $threadList['AdminThreads'];
+    $threads = str_replace($_POST['name']."`", "", $threads);
+    $threads = $_POST['name']."`".$threads;
+    $restoreQuery = mysqli_query($db_handle, "UPDATE users SET AdminThreads='".$threads."' WHERE id='".$_SESSION['cur_id']."';");
+  }
 }
 
 //For each user subscribed to this thread, update the order of the posts
